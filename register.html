@@ -75,14 +75,14 @@
               <h2>User Registration</h2>
               <!-- register.html -->
 
-
+<form action="http://localhost:3001/register" method="post">
     <input type="text" name="name" placeholder="Name" required>
     <input type="text" name="contact" placeholder="Contact" required>
     <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Password" required>
     <!-- Add more fields as needed -->
-    <button id="submitBtn" type="submit">Register</button>
-
+    <button type="submit">Register</button>
+</form>
 
             </div>
           </div>
@@ -106,12 +106,7 @@
 
   <script src="jquery-3.4.1.min.js"></script>
   <script src="bootstrap.js"></script>
-<script>
-document.getElementById("submitBtn").addEventListener("click", function() {
-    // Redirect to the new HTML page
-    window.location.href = "user-home.html";
-});
-</script>
+
 </body>
 
 </html>

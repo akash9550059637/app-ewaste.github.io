@@ -163,7 +163,7 @@
         <a class="nav-link" href="#services">Services</a>
                 </li>
          <li class="nav-item">
-        <a class="nav-link" href="index.html">Logout</a>
+        <a class="nav-link" href="#services">Logout</a>
                 </li>
               </ul>
         
@@ -253,7 +253,7 @@ your dedication to sustainability not only saves the environment, but also shape
  <div id="e-waste-popup">
     <button id="close-button">Close</button>
     <h2>Facility Details</h2>
-    <form id="ewaste-form">
+    <form id="ewaste-form" action="http://localhost:3001/facilityDetails" method="post">
         <div>
       <label for="email">Email:</label>
       <input name="email" type="email" id="email" required>
@@ -277,7 +277,7 @@ your dedication to sustainability not only saves the environment, but also shape
         <div id="coordinates-container"></div>
         <div class="map-container" id="mapbox-map"></div>
         <br>
-        <button id="submitBtn" type="submit" id="submit-button">Submit</button>
+        <button type="submit" id="submit-button">Submit</button>
     </form>
 </div>
 
@@ -419,17 +419,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
- <script>
-document.getElementById("submitBtn").addEventListener("click", function() {
-    // Display a success message
-    alert("Facility details updated successfully.");
-    
-    // Redirect to the new HTML page after a delay (in this case, 3 seconds)
-    setTimeout(function() {
-        window.location.href = "admin-index.html";
-    }, 3000); // 3000 milliseconds = 3 seconds
-});
-</script>
+
 </body>
 
 </html>

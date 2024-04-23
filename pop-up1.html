@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-waste Details</title>
+    <link rel="stylesheet" href="popupcss.css">
+</head>
+<body>
+    <div id="e-waste-popup">
+        <h2>Enter the E-waste Details</h2>
+        <form>
+            <label for="gadgets-dropdown">Select Electronic Gadgets for Recycling:</label>
+            <select id="gadgets-dropdown" name="gadgets">
+                <option value="laptop">Laptop</option>
+                <option value="smartphone">Smartphone</option>
+                <!-- Add up to 10 more options here -->
+            </select>
+            <br>
+            <label for="additional-details">Additional Details:</label>
+            <textarea id="additional-details" name="additional-details" placeholder="Enter additional information"></textarea>
+            <br>
+            <button id="locate-button">Locate</button>
+            <div class="map-container" id="mapbox-map"></div>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN'; // Replace with your Mapbox access token
+        const map = new mapboxgl.Map({
+            container: 'mapbox-map',
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: [-24, 42], // Starting center in [lng, lat]
+            zoom: 1 // Starting zoom
+        });
+
+        // Add geolocate control to the map
+        map.addControl(
+            new mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true
+                },
+                trackUserLocation: true, // Receive updates to the device's location
+                showUserHeading: true // Show an arrow next to the location dot indicating device direction
+            })
+        );
+    </script>
+    <!-- Add any additional JavaScript code for custom functionality -->
+</body>
+</html>

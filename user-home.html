@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>User Home Page</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <script>
+        window.addEventListener('popstate', function(event) {
+            history.pushState(null, null, window.location.href); // Update browser history
+            location.reload(true); // Reload the page when the back button is clicked
+        });
+    </script>
+	
+	 <style>
+	 
+	 #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity (last value) as needed */
+    z-index: 9999; /* Ensure the overlay is above other content */
+    display: none; /* Initially hidden */
+}
+
+        #e-waste-popup {
+            width: 400px;
+            height: 400px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: auto;
+            display: none;
+			z-index: 9999;
+        }
+
+        #e-waste-popup h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #e-waste-popup form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #e-waste-popup label {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        #e-waste-popup select,
+        #e-waste-popup textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #e-waste-popup button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #e-waste-popup button:hover {
+            background-color: #0056b3;
+        }
+
+        #e-waste-popup .map-container {
+            /* Add your map styling here */
+        }
+
+        .content {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+          }
+          .educate-popup {
+            display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    overflow: auto;
+          }
+          .educate-popup:target {
+            visibility: visible;
+            opacity: 1;
+          }
+          .popup_educate {
+             background-color: #fff;
+    max-width: 80%;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+          }
+          .popup_educate .close_popup {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            transition: all 200ms;
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+			
+			
+          }
+          .popup_body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+          }
+          h1 {
+            color: #333;
+          }
+          p {
+            color: #666;
+          }
+          .component {
+            margin-bottom: 20px;
+          }
+          .component h2 {
+            color: #555;
+          }
+    </style>
+	
+</head>
+
+<body>
+<div id="overlay"></div>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar Start -->
+        <div class="container-fluid nav-bar bg-transparent">
+            <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
+                <a href="user-home.html" class="navbar-brand d-flex align-items-center text-center">
+                    <div class="icon p-2 me-2">
+                        <img class="img-fluid" src="logo.png" alt="Icon" style="width: 30px; height: 30px;">
+                    </div>
+                    <h1 class="m-0 text-primary">Hello! User</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto">
+                        <a href="#section1" class="nav-item nav-link active">Home</a>
+                        <a href="#section2" class="nav-item nav-link">About</a>
+                        <div class="nav-item dropdown">
+                            <a  class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Recycle</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <a href="#" id="popup" class="dropdown-item">REQUEST PICK-UP</a>
+                                <a href="#section3" class="dropdown-item">ESTIMATE REWARDS</a>
+                                <a href="#section3" class="dropdown-item">VIEW PICK-UPS</a>
+                            </div>
+                        </div>
+                        <div class="navbar-nav ms-auto">
+                            <a href="#section4" class="nav-item nav-link ">Orders</a>
+                            <a href="#section5" class="nav-item nav-link">Rewards</a>
+                            <a href="#section6" class="nav-item nav-link">Contact</a>
+                            <a href="#section7" class="nav-item nav-link">logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Navbar End -->
+		
+	
+        <!-- Header Start -->
+        
+        <div id="section1" class="container-fluid header bg-white p-0">
+            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+                <div class="col-md-6 p-5 mt-lg-5">
+                    <h1 class="display-5 animated fadeIn mb-4">Join us <span class="text-primary"></span>to make e-waste recycling easy</h1>
+                    <p class="animated fadeIn mb-4 pb-2"> let's turn your old gadgets into green energy!
+                         Responsible e-waste recycling made easy, because saving the planet starts with us.</p>
+                    <a href="" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">Get Started</a>
+                </div>
+                <div class="col-md-6 animated fadeIn">
+                    <div class="owl-carousel header-carousel">
+                        <div class="owl-carousel-item">
+                            <img class="img-fluid" src="recycle1.jpg" alt="">
+                        </div>
+                        <div class="owl-carousel-item">
+                            <img class="img-fluid" src="recycle3.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+
+
+        <!-- Search Start -->
+        <div id="section3" class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+            <div class="container">
+                <div class="row g-2">
+                    <div class="col-md-10">
+                        <div class="row g-2">
+                            <div class="col-md-4">
+                                <select id="device-type" class="form-select border-0 py-3">
+                                    <option selected disabled>Select device</option>
+                                    <option value="laptop">Laptop</option>
+                                    <option value="smartphone">Smartphone</option>
+                                    <option value="television">Television</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select id="quantity" class="form-select border-0 py-3">
+                                    <option selected disabled>Quantity</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button id="estimate-btn" class="btn btn-dark border-0 w-100 py-3">Estimate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Display Estimated Rewards -->
+        <div id="result-container" class="container" style="display: none;">
+            <div class="row">
+                <div class="col">
+                    <h3>Estimated Rewards</h3>
+                    <p id="reward-result"></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Search End -->
+		
+		
+		<!--Map section-->
+		<section id="mapSection" style="display: flex; justify-content: center; align-items: center; padding: 10px;">
+  <div id="map" style="height: 500px; width: 500px; border-radius: 50%; overflow: hidden;"></div>
+  <button id="locateBtn" style="margin-left: 20px; padding: 8px; cursor: pointer;" onclick="locateUser()">Locate</button>
+  </section>
+<!--Map section ends-->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+	<!-- Include Leaflet CSS -->
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<!--Map section ends-->
+
+        <!-- Category Start -->
+        <div id="section3.1" class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3">EDUCATE</h1>
+                    <p>Learn about various harmful materials in electronic gadgets</p>
+                </div>
+                <div class="row g-4">
+                    <!-- Category item -->
+<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+    <a class="cat-item d-block bg-light text-center rounded p-3" href="#laptop">
+        <div class="rounded p-4">
+            <div class="icon mb-3">
+                <img class="img-fluid" src="Laptop.jpg" alt="Icon">
+            </div>
+            <h6>Laptop</h6>
+        </div>
+    </a>
+</div>
+                    <!-- Category item for Smart Phone -->
+<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="cat-item d-block bg-light text-center rounded p-3" onclick="openPopup('smartphone-popup')">
+        <div class="rounded p-4">
+            <div class="icon mb-3">
+                <img class="img-fluid" src="smartphone.jpg" alt="Icon">
+            </div>
+            <h6>Smart Phone</h6>
+        </div>
+    </div>
+</div>
+					
+					
+                   <!-- Category item for Computer -->
+<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+    <div class="cat-item d-block bg-light text-center rounded p-3" onclick="openPopup('computer-popup')">
+        <div class="rounded p-4">
+            <div class="icon mb-3">
+                <img class="img-fluid" src="computer.jpg" alt="Icon">
+            </div>
+            <h6>Computer</h6>
+        </div>
+    </div>
+</div>
+				   
+				   
+                    <!-- Category item for Rechargeable Batteries -->
+<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+    <div class="cat-item d-block bg-light text-center rounded p-3" onclick="openPopup('battery-popup')">
+        <div class="rounded p-4">
+            <div class="icon mb-3">
+                <img class="img-fluid" src="battery.png" alt="Icon">
+            </div>
+            <h6>Rechargeable Batteries</h6>
+        </div>
+    </div>
+</div>
+					
+					
+					
+                    <!-- Category item for LCD Screens -->
+<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="cat-item d-block bg-light text-center rounded p-3" onclick="openPopup('lcd-popup')">
+        <div class="rounded p-4">
+            <div class="icon mb-3">
+                <img class="img-fluid" src="lcd.png" alt="Icon">
+            </div>
+            <h6>LCD Screens</h6>
+        </div>
+    </div>
+</div>
+					
+					
+                    <!-- Category item for Refrigerators and Air Conditioners -->
+<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+    <div class="cat-item d-block bg-light text-center rounded p-3" onclick="openPopup('fridge-popup')">
+        <div class="rounded p-4">
+            <div class="icon mb-3">
+                <img class="img-fluid" src="fridge.png" alt="Icon">
+            </div>
+            <h6>Refrigerators and Air Conditioners</h6>
+        </div>
+    </div>
+</div>
+					
+					
+					
+                    <!-- Category item for Older Electronics -->
+<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+    <a class="cat-item d-block bg-light text-center rounded p-3" href="#" onclick="openPopup('old-popup')">
+        <div class="rounded p-4">
+            <div class="icon mb-3">
+                <img class="img-fluid" src="old.jpg" alt="Icon">
+            </div>
+            <h6>Older Electronics</h6>
+        </div>
+    </a>
+</div>
+
+					
+					
+                    <!-- Category item for Monitors and TVs -->
+<div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+    <a class="cat-item d-block bg-light text-center rounded p-3" href="#" onclick="openPopup('tv-popup')">
+        <div class="rounded p-4">
+            <div class="icon mb-3">
+                <img class="img-fluid" src="tv.png" alt="Icon">
+            </div>
+            <h6>Monitors and TVs</h6>
+        </div>
+    </a>
+</div>
+        <!-- Category End -->
+
+        <!-- Footer Start -->
+        <div id="section6"class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">For any queries</h5>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>E-waste recycling centre</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 678 90</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>disposalcentre@gmail.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Quick Links</h5>
+                        <a class="btn btn-link text-white-50" href="">About Us</a>
+                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
+                        <a class="btn btn-link text-white-50" href="">Our Services</a>
+                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Newsletter</h5>
+                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved. 
+							
+							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+							Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="">Home</a>
+                                <a href="">Cookies</a>
+                                <a href="">Help</a>
+                                <a href="">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <div id="laptop" class="educate-popup">
+            <div class="popup_educate">
+                <h2>Laptop</h2>
+                <a class="close_popup" href="#">&times;</a>
+                
+                    <div class="popup_body" >
+                        <h1>Harmful Components in Laptops</h1>
+
+                        <div class="component">
+                          <h2>Batteries</h2>
+                          <p>Laptop batteries contain toxic metals such as lithium, cadmium, and lead. Improper disposal can lead to contamination of soil and groundwater, posing risks to human health and ecosystems.</p>
+                        </div>
+                      
+                        <div class="component">
+                          <h2>Mercury</h2>
+                          <p>Some laptops contain small amounts of mercury in fluorescent lamps used for backlighting. Mercury is highly toxic and can harm ecosystems and human health if released into the environment through improper disposal.</p>
+                        </div>
+                      
+                        <div class="component">
+                          <h2>Lead</h2>
+                          <p>Lead is present in solder used on circuit boards. Improper disposal of laptops can result in lead leaching into the soil and water, posing risks to human health, particularly in children and developing fetuses.</p>
+                        </div>
+                      
+                        <div class="component">
+                          <h2>Brominated Flame Retardants (BFRs)</h2>
+                          <p>BFRs used in laptops can persist in the environment and accumulate in living organisms. Improper disposal can lead to the release of BFRs into the environment, posing risks to human health and ecosystems.</p>
+                        </div>
+                      
+                        <div class="component">
+                          <h2>Plastics</h2>
+                          <p>While not inherently toxic, plastics in laptops can release harmful chemicals when they degrade. Improper disposal can result in pollution and harm to wildlife and ecosystems.</p>
+                        </div>        
+                        </div>
+                    </div>
+            </div>
+       
+        
+        
+        <div id="smartphone-popup" class="educate-popup">
+            <div class="popup_educate">
+                <h2>Components in SmartPhone</h2>
+                <a class="close_popup" href="javascript:void(0);" onclick="closePopup('smartphone-popup')">&times;</a>
+
+                <div class="popup_body">
+                    <div class="content">
+
+                        <!-- Smartphones -->
+                        <div class="component">
+                          <h2>Lithium-ion Batteries</h2>
+                          <p>Smartphones often contain lithium-ion batteries which can leak toxic chemicals if not disposed of properly. These chemicals can contaminate soil and water sources, posing risks to human and environmental health. Lithium-ion batteries can also pose a fire risk if they are damaged or improperly handled.</p>
+                        </div>
+                    
+                        <div class="component">
+                          <h2>Mercury</h2>
+                          <p>Some smartphones may contain small amounts of mercury in components such as the display backlighting. Mercury is highly toxic and can harm ecosystems and human health if released into the environment through improper disposal. Long-term exposure to mercury can lead to serious health issues, including neurological disorders.</p>
+                        </div>
+                    
+                        <div class="component">
+                          <h2>Lead</h2>
+                          <p>Lead is present in solder used in smartphone circuit boards. Improper disposal of smartphones can result in lead leaching into the soil and water, posing risks to human health, particularly in children and developing fetuses. Lead exposure can lead to developmental delays, learning difficulties, and other health problems.</p>
+                        </div>
+                    
+                        <div class="component">
+                          <h2>Brominated Flame Retardants (BFRs)</h2>
+                          <p>BFRs are used in smartphones to reduce the risk of fire. However, these chemicals can persist in the environment and accumulate in living organisms. Improper disposal can lead to the release of BFRs into the environment, posing risks to human health and ecosystems. These chemicals have been linked to hormone disruption and developmental disorders.</p>
+                        </div>
+                    
+                        <div class="component">
+                          <h2>Plastics</h2>
+                          <p>Smartphones contain various types of plastics in their casings and components. While not inherently toxic, plastics can release harmful chemicals when they degrade. Improper disposal can result in pollution and harm to wildlife and ecosystems. Some plastics used in smartphones contain additives that have been linked to health issues in humans.</p>
+                        </div>
+                    
+                      </div>
+                </div>
+            </div>
+        </div>
+        
+		
+		<div id="computer-popup" class="educate-popup">
+            <div class="popup_educate">
+                <h2>Components in Computer</h2>
+                <a class="close_popup" href="#" onclick="closePopup('computer-popup')">&times;</a>
+                <div class="popup_body">
+                    <div class="content">
+                      <!-- Computers -->
+                        <div class="component">
+                            <h2>Lead</h2>
+                            <p>Computers may contain lead in solder used on circuit boards and in CRT monitors. Improper disposal of computers can result in lead leaching into the soil and water, posing risks to human health, particularly in children and developing fetuses. Lead exposure can lead to neurological and developmental issues, especially in children.</p>
+                        </div>
+                    
+                        <div class="component">
+                            <h2>Mercury</h2>
+                            <p>Some components in computers, such as older switches and relays, may contain mercury. Mercury is highly toxic and can harm ecosystems and human health if released into the environment through improper disposal. Long-term exposure to mercury can lead to serious health issues, including neurological disorders.</p>
+                        </div>
+                    
+                        <div class="component">
+                            <h2>Brominated Flame Retardants (BFRs)</h2>
+                            <p>BFRs are commonly used in computer housings, circuit boards, and cables to reduce the risk of fire. However, these chemicals can persist in the environment and accumulate in living organisms. Improper disposal can lead to the release of BFRs into the environment, posing risks to human health and ecosystems. These chemicals have been linked to hormone disruption and developmental disorders.</p>
+                        </div>
+                    
+                        <div class="component">
+                            <h2>Plastics</h2>
+                            <p>Computers contain various types of plastics in their casings, cables, and components. While not inherently toxic, plastics can release harmful chemicals when they degrade. Improper disposal can result in pollution and harm to wildlife and ecosystems. Some plastics used in computers contain additives that have been linked to health issues in humans.</p>
+                        </div>
+                    
+                        <div class="component">
+                            <h2>Chlorofluorocarbons (CFCs)</h2>
+                            <p>Older computers and monitors may contain CFCs in cooling systems and insulation. CFCs are ozone-depleting substances that contribute to global warming. Proper disposal is essential to prevent the release of CFCs into the atmosphere. Exposure to CFCs can lead to respiratory problems and environmental damage.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		
+       <div id="battery-popup" class="educate-popup">
+    <div class="popup_educate">
+        <h2>Components in Battery</h2>
+        <a class="close_popup" href="#" onclick="closePopup('battery-popup')">&times;</a>
+                <div class="popup_body">
+                    <div class="content">
+
+                        <!-- Rechargeable Batteries -->
+                        <div class="component">
+                          <h2>Cadmium</h2>
+                          <p>Rechargeable batteries, such as nickel-cadmium (NiCd) batteries, contain cadmium, which is highly toxic. Improper disposal can lead to cadmium leaching into the soil and water, posing risks to ecosystems and human health. Chronic exposure to cadmium has been linked to kidney damage and bone diseases.</p>
+                        </div>
+                    
+                        <div class="component">
+                          <h2>Lithium-ion Batteries</h2>
+                          <p>Lithium-ion batteries, commonly used in rechargeable electronic devices, contain toxic materials such as lithium, cobalt, and nickel. Improper disposal can lead to environmental pollution and health risks due to the release of these toxic substances. Lithium-ion batteries can also pose a fire hazard if they are damaged or improperly handled.</p>
+                        </div>
+                    
+                        <div class="component">
+                          <h2>Nickel</h2>
+                          <p>Some rechargeable batteries, such as nickel-metal hydride (NiMH) batteries, contain nickel, which can be harmful to the environment and human health if not disposed of properly. Nickel can leach into the soil and water, posing risks to ecosystems and potentially causing allergic reactions or other health problems in humans.</p>
+                        </div>
+                    
+                        <div class="component">
+                          <h2>Electrolytes</h2>
+                          <p>Rechargeable batteries contain electrolytes, which are typically made of acidic or alkaline solutions. Improper disposal can lead to the release of these electrolytes into the environment, causing soil and water contamination and posing risks to human and environmental health. Some electrolytes can be corrosive or toxic if ingested or inhaled.</p>
+                        </div>
+                    
+                        <div class="component">
+                          <h2>Plastics</h2>
+                          <p>Rechargeable batteries often contain plastic casings and components. While not inherently toxic, plastics can release harmful chemicals when they degrade. Improper disposal can result in pollution and harm to wildlife and ecosystems. Some plastics used in batteries contain additives that have been linked to health issues in humans.</p>
+                        </div>
+                    
+                      </div>
+                </div>
+            </div>
+        </div>
+         
+        
+
+        <div id="lcd-popup" class="educate-popup">
+    <div class="popup_educate">
+        <h2>Components in LCD screens</h2>
+        <a class="close_popup" href="#" onclick="closePopup('lcd-popup')">&times;</a>
+                <div class="popup_body">
+                    <div class="content">
+                        <div class="component">
+                            <h2>Mercury</h2>
+                            <p>Some LCD screens contain mercury, a highly toxic substance. If not disposed of properly, mercury can contaminate the environment, leading to serious health and environmental risks. Mercury exposure can damage the nervous system, kidneys, and other organs.</p>
+                          </div>
+                      
+                          <div class="component">
+                            <h2>Fluorescent Lamps</h2>
+                            <p>Many LCD screens use fluorescent lamps for backlighting. These lamps contain mercury vapor, which can be released into the environment if the screen is not properly disposed of. Mercury vapor is highly toxic and can pose significant health risks, especially through inhalation.</p>
+                          </div>
+                      
+                          <div class="component">
+                            <h2>Lead</h2>
+                            <p>Some LCD screens may contain lead in solder used on circuit boards or in other components. Improper disposal of LCD screens can result in lead leaching into the soil and water, posing risks to human health, particularly in children and developing fetuses. Lead exposure can lead to neurological and developmental issues, especially in children.</p>
+                          </div>
+                      
+                          <div class="component">
+                            <h2>Arsenic</h2>
+                            <p>Arsenic is used in some LCD screens as a semiconductor material. Improper disposal of LCD screens can lead to arsenic leaching into the environment, posing risks to human health and ecosystems. Arsenic exposure can lead to a range of health issues, including skin lesions, cardiovascular disease, and cancer.</p>
+                          </div>
+                      
+                          <div class="component">
+                            <h2>Plastics</h2>
+                            <p>Many components of LCD screens are made of plastics. While not inherently toxic, plastics can release harmful chemicals when they degrade. Improper disposal can result in pollution and harm to wildlife and ecosystems. Some plastics used in LCD screens contain additives that have been linked to health issues in humans.</p>
+                          </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="fridge-popup" class="educate-popup">
+    <div class="popup_educate">
+        <h2>Components in Refrigerators and Air Conditioners</h2>
+        <a class="close_popup" href="#" onclick="closePopup('fridge-popup')">&times;</a>
+                <div class="popup_body">
+                    <div class="content">
+                        <div class="component">
+                            <h2>Chlorofluorocarbons (CFCs)</h2>
+                            <p>Refrigerators and air conditioners contain CFCs, which deplete the ozone layer and contribute to global warming. Proper disposal is essential to prevent the release of CFCs into the atmosphere. Exposure to CFCs can lead to respiratory problems and environmental damage.</p>
+                          </div>
+                      
+                          <div class="component">
+                            <h2>Hydrochlorofluorocarbons (HCFCs)</h2>
+                            <p>Older refrigerators and air conditioners may contain HCFCs, which are less damaging to the ozone layer than CFCs but still contribute to global warming. Proper disposal is necessary to prevent the release of HCFCs into the atmosphere. Exposure to HCFCs can lead to respiratory problems and environmental damage.</p>
+                          </div>
+                      
+                          <div class="component">
+                            <h2>Refrigerants</h2>
+                            <p>Refrigerators and air conditioners contain refrigerants, which are chemicals used to cool the air or refrigerate food. Some refrigerants, such as hydrofluorocarbons (HFCs), are potent greenhouse gases that contribute to global warming. Improper disposal can lead to the release of refrigerants into the atmosphere, exacerbating climate change.</p>
+                          </div>
+                      
+                          <div class="component">
+                            <h2>Electronic Waste</h2>
+                            <p>Refrigerators and air conditioners contain electronic components that can be harmful to the environment if not disposed of properly. These components may contain heavy metals such as lead, mercury, and cadmium, which can leach into the soil and water, posing risks to human health and ecosystems.</p>
+                          </div>
+                      
+                          <div class="component">
+                            <h2>Plastics</h2>
+                            <p>Refrigerators and air conditioners contain various plastics in their casings and components. While not inherently toxic, plastics can release harmful chemicals when they degrade. Improper disposal can result in pollution and harm to wildlife and ecosystems. Some plastics used in refrigerators and air conditioners contain additives that have been linked to health issues in humans.</p>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		
+        <div id="old-popup" class="educate-popup">
+    <div class="popup_educate">
+        <h2>Components in Older Electronics</h2>
+        <a class="close_popup" href="#" onclick="closePopup('old-popup')">&times;</a>
+        <div class="popup_body">
+                    <div class="content">
+                        <div class="component">
+                            <h2>Heavy Metals</h2>
+                            <p>Older electronics may contain heavy metals such as lead, mercury, and cadmium, which are harmful to human health and the environment. Proper disposal is necessary to prevent pollution and health risks. These metals can bioaccumulate in the food chain and cause long-term health problems.</p>
+                          </div>
+                      
+                          <div class="component">
+                            <h2>Chlorofluorocarbons (CFCs)</h2>
+                            <p>Older electronics, such as CRT monitors and older refrigerators, may contain CFCs, which deplete the ozone layer and contribute to global warming. Proper disposal is essential to prevent the release of CFCs into the atmosphere. Exposure to CFCs can lead to respiratory problems and environmental damage.</p>
+                          </div>
+                      
+                          <div class="component">
+                            <h2>Brominated Flame Retardants (BFRs)</h2>
+                            <p>BFRs were commonly used in older electronics to reduce the risk of fire. However, these chemicals can persist in the environment and accumulate in living organisms. Improper disposal can lead to the release of BFRs into the environment, posing risks to human health and ecosystems. These chemicals have been linked to hormone disruption and developmental disorders.</p>
+                          </div>
+                      
+                          <div class="component">
+                            <h2>Plastics</h2>
+                            <p>Older electronics often contain plastics in their casings and components. While not inherently toxic, plastics can release harmful chemicals when they degrade. Improper disposal can result in pollution and harm to wildlife and ecosystems. Some plastics used in older electronics contain additives that have been linked to health issues in humans.</p>
+                          </div>
+                      
+                          <div class="component">
+                            <h2>Electronic Waste</h2>
+                            <p>Older electronics contribute to the growing problem of electronic waste (e-waste). Improper disposal of e-waste can lead to environmental pollution and health risks. Recycling or proper disposal of old electronics is essential to minimize their impact on the environment and human health.</p>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		
+       <div id="tv-popup" class="educate-popup">
+    <div class="popup_educate">
+        <h2>Components in Monitors and TVs</h2>
+        <a class="close_popup" href="#" onclick="closePopup('tv-popup')">&times;</a>
+                <div class="popup_body">
+                    <div class="content">
+                    <!-- Monitors and TVs -->
+                        <div class="component">
+                            <h2>Mercury</h2>
+                            <p>Some monitors and TVs contain mercury, a highly toxic substance. If not disposed of properly, mercury can contaminate the environment, leading to serious health and environmental risks. Mercury exposure can damage the nervous system, kidneys, and other organs.</p>
+                        </div>
+                    
+                        <div class="component">
+                            <h2>Phosphor</h2>
+                            <p>Monitors and TVs contain phosphor, which can release toxic substances if not disposed of properly. Improper disposal can lead to environmental contamination and health risks. Phosphor contains heavy metals such as mercury and lead, which are hazardous to human health and the environment.</p>
+                        </div>
+                    
+                        <div class="component">
+                            <h2>Lead</h2>
+                            <p>Some monitors and TVs may contain lead in solder used on circuit boards or in other components. Improper disposal of monitors and TVs can result in lead leaching into the soil and water, posing risks to human health, particularly in children and developing fetuses. Lead exposure can lead to neurological and developmental issues, especially in children.</p>
+                        </div>
+                    
+                        <div class="component">
+                            <h2>Brominated Flame Retardants (BFRs)</h2>
+                            <p>BFRs are commonly used in monitors and TVs to reduce the risk of fire. However, these chemicals can persist in the environment and accumulate in living organisms. Improper disposal can lead to the release of BFRs into the environment, posing risks to human health and ecosystems. These chemicals have been linked to hormone disruption and developmental disorders.</p>
+                        </div>
+                    
+                        <div class="component">
+                            <h2>Plastics</h2>
+                            <p>Monitors and TVs contain various plastics in their casings and components. While not inherently toxic, plastics can release harmful chemicals when they degrade. Improper disposal can result in pollution and harm to wildlife and ecosystems. Some plastics used in monitors and TVs contain additives that have been linked to health issues in humans.</p>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		 <!-- Pop-up HTML content -->
+        <div id="e-waste-popup">
+    <button id="close-button">Close</button>
+    <h2>Request for E-waste Pickup</h2>
+    <form id="ewaste-form" >
+        <input type="text" id="email" name="email" placeholder="Enter Email that is used for Login">
+        <br>
+        <label for="device-category">Select or Enter the Device Category:</label>
+        <select id="device-category" name="productCategory">
+            <option value="mobile">Mobile</option>
+            <option value="laptop">Laptop</option>
+            <option value="television">Television</option>
+            <option value="computer">Computer</option>
+            <option value="washing-machine">Washing Machine</option>
+            <option value="mixer">Mixer</option>
+            <!-- Add more options as needed -->
+        </select>
+        <input type="text" id="custom-device" name="productName" placeholder="Enter custom device name">
+        <br>
+        <label for="additional-details">Additional Details:</label>
+        <textarea id="additional-details" name="additionalInfo" placeholder="Enter additional information"></textarea>
+        <br>
+        <!-- Hidden input field to store location coordinates -->
+        <input type="hidden" id="location-input" name="location">
+        <button id="locate-button">Locate</button>
+        <br>
+        <div id="coordinates-container"></div>
+        <div class="map-container" id="mapbox-map"></div>
+        <br>
+        <button id="submitBtn" type="submit" id="submit-button">Submit</button>
+    
+</div>
+
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+	
+	
+
+        <!-- Custom Pop-up JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const overlay = document.getElementById('overlay');
+        const popup = document.getElementById('e-waste-popup');
+
+        // Function to open the pop-up
+        function openPopup() {
+            popup.style.display = 'block';
+            overlay.style.display = 'block'; // Show overlay
+        }
+
+        // Function to close the pop-up
+        function closePopup() {
+            popup.style.display = 'none';
+            overlay.style.display = 'none'; // Hide overlay
+        }
+
+        // Add event listener to open the pop-up when "REQUEST PICK-UP" is clicked
+        document.getElementById('popup').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default link behavior
+            openPopup(); // Open the pop-up
+        });
+
+        // Add event listener to close the pop-up when the close button is clicked
+        document.getElementById('close-button').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default button behavior
+            closePopup(); // Close the pop-up
+        });
+
+        // Event listener to close the pop-up when clicking on the overlay
+        overlay.addEventListener('click', function() {
+            closePopup();
+        });
+
+        // Event listener to prevent closing the pop-up when clicking inside the pop-up itself
+        popup.addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+    });
+	
+	
+	//Locate button functionality
+	
+	document.addEventListener('DOMContentLoaded', function() {
+    const locateButton = document.getElementById('locate-button');
+    const coordinatesContainer = document.getElementById('coordinates-container');
+    const locationInput = document.getElementById('location-input');
+
+    // Function to get user's current location
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                // Capture user's latitude and longitude
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                // Show coordinates in the container beside the button
+                coordinatesContainer.textContent = "Latitude: " + latitude + ", Longitude: " + longitude;
+
+                // Update the value of the hidden input field with the coordinates
+                locationInput.value = latitude + "," + longitude;
+            }, function(error) {
+                console.error("Error getting user's location:", error);
+            });
+        } else {
+            console.error("Geolocation is not supported by this browser.");
+        }
+    }
+
+    // Event listener for the locate button to get user's location
+    locateButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default form submission behavior
+        getLocation();
+    });
+});
+
+
+</script>
+
+
+<!-- Map script -->
+<script>
+  var map = L.map('map').setView([0, 0], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  function locateUser() {
+    map.locate({ setView: true, maxZoom: 15 });
+  }
+
+  map.on('locationfound', function (e) {
+    var circle = L.circle(e.latlng, {
+      color: 'blue',
+      fillColor: '#3186cc',
+      fillOpacity: 0.5,
+      radius: 1,
+    }).addTo(map);
+
+    var marker = L.marker(e.latlng).addTo(map);
+    marker.bindPopup('You are here!').openPopup();
+  });
+
+  map.on('locationerror', function (e) {
+    alert("Location access denied or not available.");
+  });
+</script>
+
+
+
+
+
+<!-- Map script -->
+<script>
+    var map = L.map('map').setView([0, 0], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    function locateUser() {
+        map.locate({ setView: true, maxZoom: 15 });
+    }
+
+    map.on('locationfound', function (e) {
+        var circle = L.circle(e.latlng, {
+            color: 'blue',
+            fillColor: '#3186cc',
+            fillOpacity: 0.5,
+            radius: 1,
+        }).addTo(map);
+
+        var marker = L.marker(e.latlng).addTo(map);
+        
+        // Define popup content with details
+        var popupContent = "<b>Name:</b> John Doe<br><b>Contact:</b> 123-456-7890<br><b>Email:</b> john@example.com";
+
+        // Create a tooltip
+        marker.bindTooltip(popupContent, {
+            permanent: true, // Show the tooltip permanently
+            direction: 'top' // Position the tooltip above the marker
+        }).openTooltip();
+    });
+
+    map.on('locationerror', function (e) {
+        alert("Location access denied or not available.");
+    });
+</script>
+
+<script>
+var mgitLocation = { name: "Facility 1", latlng: [17.433321078427046, 78.3847636454859], contact: "91********", email: "mgit@locator.com" };
+
+    // Add MGIT location marker
+    var mgitMarker = L.marker(mgitLocation.latlng).addTo(map);
+    
+    // Define popup content for MGIT location
+    var mgitPopupContent = "<b>Name:</b> " + mgitLocation.name + "<br><b>Contact:</b> " + mgitLocation.contact + "<br><b>Email:</b> " + mgitLocation.email;
+
+    // Create a tooltip for MGIT location
+    mgitMarker.bindTooltip(mgitPopupContent, {
+        permanent: true,
+        direction: 'top'
+    }).openTooltip();
+	</script>
+<!--map script ends-->
+<!--map script ends-->
+
+<script>
+    document.getElementById('logout-btn').addEventListener('click', function() {
+        // Redirect the user to the login page
+        window.location.href = '/login.html';
+    });
+</script>
+    <script>
+        document.getElementById('estimate-btn').addEventListener('click', function() {
+            // Get selected device type and quantity
+            const deviceType = document.getElementById('device-type').value;
+            const quantity = document.getElementById('quantity').value;
+        
+            // Make a fetch request to estimate rewards
+            fetch('/estimate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        items: [{
+                            name: deviceType,
+                            quantity: parseInt(quantity) // Convert quantity to integer
+                        }]
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Display the estimated rewards in the result container
+                    const totalRewards = data.totalRewards;
+                    document.getElementById('reward-result').textContent = `Total Rewards: ${totalRewards} points`;
+                    document.getElementById('result-container').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error estimating rewards:', error);
+                });
+        });
+        
+    </script>
+<script>
+var mgitLocation = { name: "Facility 2", latlng: [17.453628079305627, 78.34057794096586], contact: "91********", email: "mgit@locator.com" };
+
+    // Add MGIT location marker
+    var mgitMarker = L.marker(mgitLocation.latlng).addTo(map);
+    
+    // Define popup content for MGIT location
+    var mgitPopupContent = "<b>Name:</b> " + mgitLocation.name + "<br><b>Contact:</b> " + mgitLocation.contact + "<br><b>Email:</b> " + mgitLocation.email;
+
+    // Create a tooltip for MGIT location
+    mgitMarker.bindTooltip(mgitPopupContent, {
+        permanent: true,
+        direction: 'top'
+    }).openTooltip();
+	</script>
+<!--map script ends-->
+
+
+<!-- pop for laptop-->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const popupTrigger = document.querySelector('.cat-item');
+    const popup = document.querySelector('.educate-popup');
+    const closePopup = document.querySelector('.close_popup');
+	
+
+    // Function to show the popup
+    const showPopup = function (e) {
+        e.preventDefault(); // Prevent default link behavior (page refresh)
+        popup.style.display = 'block';
+    };
+
+    // Function to hide the popup
+    const hidePopup = function (e) {
+        e.preventDefault(); // Prevent default link behavior (page refresh)
+        popup.style.display = 'none';
+    };
+
+    // Show popup when category item is clicked
+    popupTrigger.addEventListener('click', showPopup);
+
+    // Hide popup when close button is clicked
+    closePopup.addEventListener('click', hidePopup);
+
+    // Hide popup when clicking outside the popup content
+    window.addEventListener('click', function (e) {
+        if (e.target === popup) {
+            hidePopup(e);
+        }
+    });
+});
+
+
+// Function to open the smartphone popup
+function openPopup(popupId) {
+    const popup = document.getElementById(popupId);
+    if (popup) {
+        popup.style.display = 'block';
+    }
+}
+
+// Function to close the popup
+function closePopup(popupId) {
+    const popup = document.getElementById(popupId);
+    if (popup) {
+        popup.style.display = 'none';
+    }
+    // Prevent default behavior of the click event
+    event.preventDefault();
+}
+
+
+// Function to open the computer popup
+function openPopup(popupId) {
+    const popup = document.getElementById(popupId);
+    if (popup) {
+        popup.style.display = 'block';
+    }
+}
+
+// Function to close the popup
+function closePopup(popupId) {
+    const popup = document.getElementById(popupId);
+    if (popup) {
+        popup.style.display = 'none';
+    }
+    // Prevent default behavior of the click event
+    event.preventDefault();
+}
+
+
+// Function to open the battery popup
+function openPopup(popupId) {
+    const popup = document.getElementById(popupId);
+    if (popup) {
+        popup.style.display = 'block';
+    }
+}
+
+// Function to close the popup
+function closePopup(popupId) {
+    const popup = document.getElementById(popupId);
+    if (popup) {
+        popup.style.display = 'none';
+    }
+    // Prevent default behavior of the click event
+    event.preventDefault();
+}
+
+
+ </script>
+
+<script>
+    // Function to open the popup
+    function openPopup(popupId) {
+        const popup = document.getElementById(popupId);
+        if (popup) {
+            popup.style.display = 'block';
+        }
+        // Prevent default behavior of the click event
+        event.preventDefault();
+    }
+
+    // Function to close the popup
+    function closePopup(popupId) {
+        const popup = document.getElementById(popupId);
+        if (popup) {
+            popup.style.display = 'none';
+        }
+        // Prevent default behavior of the click event
+        event.preventDefault();
+    }
+</script> 
+
+<script>
+    // Function to open the popup
+    function openPopup(popupId) {
+        const popup = document.getElementById(popupId);
+        if (popup) {
+            popup.style.display = 'block';
+        }
+        // Prevent default behavior of the click event
+        event.preventDefault();
+    }
+
+    // Function to close the popup
+    function closePopup(popupId) {
+        const popup = document.getElementById(popupId);
+        if (popup) {
+            popup.style.display = 'none';
+        }
+        // Prevent default behavior of the click event
+        event.preventDefault();
+    }
+</script>
+      
+	  <script>
+document.getElementById("submitBtn").addEventListener("click", function() {
+    // Display a success message
+    alert("Request has been sent successfully.");
+    
+    // Redirect to the new HTML page after a delay (in this case, 3 seconds)
+    setTimeout(function() {
+        window.location.href = "user-home.html";
+    }, 3000); // 3000 milliseconds = 3 seconds
+});
+</script>
+</body>
+
+</html>

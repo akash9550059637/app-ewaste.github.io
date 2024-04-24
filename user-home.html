@@ -803,7 +803,7 @@
         <div id="coordinates-container"></div>
         <div class="map-container" id="mapbox-map"></div>
         <br>
-        <button type="submit" id="submit-button">Submit</button>
+        <button id="submitBtn">Submit</button>
     </form>
 </div>
 
@@ -1188,7 +1188,18 @@ function closePopup(popupId) {
         event.preventDefault();
     }
 </script>
-      
+
+		    <script>
+document.getElementById("submitBtn").addEventListener("click", function() {
+    // Show a message indicating form submission success
+    alert("Form submitted successfully.");
+    
+    // Redirect to the new HTML page after a short delay (in this case, 1 second)
+    setTimeout(function() {
+        window.location.href = "user-home.html";
+    }, 1000); // 1000 milliseconds = 1 second
+});
+</script>
 </body>
 
 </html>

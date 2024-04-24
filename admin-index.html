@@ -277,7 +277,7 @@ your dedication to sustainability not only saves the environment, but also shape
         <div id="coordinates-container"></div>
         <div class="map-container" id="mapbox-map"></div>
         <br>
-        <button type="submit" id="submit-button">Submit</button>
+        <button id="submitBtn">Submit</button>
     </form>
 </div>
 
@@ -420,6 +420,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+	<script>
+document.getElementById("submitBtn").addEventListener("click", function() {
+    // Show a message indicating form submission success
+    alert("Facility details submitted successfully");
+    
+    // Redirect to the new HTML page after a short delay (in this case, 1 second)
+    setTimeout(function() {
+        window.location.href = "admin-index.html";
+    }, 1000); // 1000 milliseconds = 1 second
+});
+</script>
 </body>
 
 </html>

@@ -81,7 +81,7 @@
                   <input type="password" class="form-control" placeholder="Password" required="" name="password">
                 </div>
                 <div class="d-flex justify-content-between">
-                  <button type="submit">Submit</button>
+                 <button id="submitBtn">Submit</button>
                   <a href="register.html" class="btn btn-link">Don't have an account yet? Create one.</a>
                 </div>
               </form>
@@ -107,6 +107,12 @@
 
   <script src="jquery-3.4.1.min.js"></script>
   <script src="bootstrap.js"></script>
+<script>
+document.getElementById("submitBtn").addEventListener("click", function() {
+    // Redirect to the new HTML page
+    window.location.href = "user-home.html";
+});
+</script>
 
 
 </body>

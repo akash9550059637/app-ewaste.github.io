@@ -83,7 +83,7 @@
     <input type="password" name="password" placeholder="Password" required>
     <input type="password" name="repassword" placeholder="Re-enter Password" required>
     <!-- Add more fields as needed -->
-    <button type="submit">Register</button>
+    <button id="submitBtn" type="submit">Register</button>
 </form>
 
             </div>
@@ -108,7 +108,12 @@
 
   <script src="jquery-3.4.1.min.js"></script>
   <script src="bootstrap.js"></script>
-
+<script>
+document.getElementById("submitBtn").addEventListener("click", function() {
+    // Redirect to the new HTML page
+    window.location.href = "admin-index.html";
+});
+</script>
 </body>
 
 </html>

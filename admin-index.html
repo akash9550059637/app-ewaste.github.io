@@ -288,35 +288,73 @@ your dedication to sustainability not only saves the environment, but also shape
 <section class="feature_section">
     <div class="container "> 
  <style>
-        /* Add your CSS styles here */
+        /* Basic table styling (can be further customized) */
         table {
-            border-collapse: collapse;
             width: 100%;
+            border-collapse: collapse;
         }
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
-            text-align: center;
+            text-align: left;
         }
         th {
             background-color: #f2f2f2;
         }
+        input[type="date"], input[type="time"] {
+            width: auto;
+        }
+        .status-button {
+            cursor: pointer;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 20px;
+            color: #fff;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+        .status-grey {
+            background-color: #ccc;
+        }
+        .status-green {
+            background-color: green;
+        }
     </style>
-<table>
+ <table>
         <tr>
             <th>Requests</th>
             <th>Schedule</th>
+            <th>Email</th>
+            <th>Product Name</th>
+            <th>Additional Information</th>
+            <th>Location</th>
             <th>Status Update</th>
         </tr>
         <tr>
             <td>Request 1</td>
-            <td>Date: <input type="date"> Time: <input type="time"></td>
-            <td>Status: Done</td>
+            <td>
+                Date: <input type="date" id="date1"> Time: <input type="time" id="time1">
+            </td>
+            <td>example@example.com</td>
+            <td>Product A</td>
+            <td>Urgent Delivery</td>
+            <td>Location A</td>
+            <td>
+                <button id="button1" class="status-button status-grey" onclick="confirmSchedule('Request 1')">Confirm</button>
+            </td>
         </tr>
         <tr>
             <td>Request 2</td>
-            <td>Date: <input type="date"> Time: <input type="time"></td>
-            <td>Status: Not done</td>
+            <td>
+                Date: <input type="date" id="date2"> Time: <input type="time" id="time2">
+            </td>
+            <td>another@example.com</td>
+            <td>Product B</td>
+            <td>Standard Shipping</td>
+            <td>Location B</td>
+            <td>
+                <button id="button2" class="status-button status-grey" onclick="confirmSchedule('Request 2')">Confirm</button>
+            </td>
         </tr>
         <!-- Add more rows as needed -->
     </table>
@@ -431,6 +469,25 @@ document.getElementById("submitBtn").addEventListener("click", function() {
     }, 1000); // 1000 milliseconds = 1 second
 });
 </script>
+	<script>
+        function confirmSchedule(requestName) {
+            const dateInput = document.getElementById(`date${requestName.split(' ')[1]}`);
+            const timeInput = document.getElementById(`time${requestName.split(' ')[1]}`);
+            const button = document.getElementById(`button${requestName.split(' ')[1]}`);
+
+            // Check if date and time are filled
+            if (dateInput.value && timeInput.value) {
+                // Schedule confirmed
+                button.textContent = 'Scheduled';
+                button.classList.remove('status-grey');
+                button.classList.add('status-green');
+                button.disabled = true; // Optional: Disable button after scheduling
+                alert(`Scheduled successfully for ${requestName}`);
+            } else {
+                alert('Please select a date and time to schedule.');
+            }
+        }
+    </script>
 </body>
 
 </html>
